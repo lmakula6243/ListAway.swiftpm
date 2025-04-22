@@ -6,28 +6,36 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+       
             
             
             Image(systemName: "photo.artframe")
+                
+                
             
                 .resizable()
                 .frame(width: 1000,height: 1000)
                 .offset(x: xPosition, y: yPosition)
                 .onAppear{
-                    
-                    withAnimation(.easeIn.speed(0.1)){
+                    withAnimation(.easeIn.speed(0.1).repeatForever()){
                         xPosition += 500
                         
                         if xPosition == 170{
-                            withAnimation(.easeOut.speed(0.1).delay(5)){
+                            withAnimation(.default.speed(0.001).delay(0.001).repeatForever()){
                                 xPosition += -500
-                                
+                                if xPosition == -330 {
+                                    withAnimation(.default.speed(0.001).delay(0.001).repeatForever()){
+                                        xPosition += 500
+                                        
+                                    }
+                                }
                     }
                 }
            
                 }
             }
             
+                
         }
     }
 }
