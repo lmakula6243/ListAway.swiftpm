@@ -5,6 +5,7 @@ struct ContentView: View {
     @State var yPosition:CGFloat = 0
     
     var body: some View {
+        NavigationView{
         ZStack {
             
             
@@ -40,19 +41,27 @@ struct ContentView: View {
                     }
                     
                 }
-            VStack {
-                Image("title3")
-                    .resizable()
-                    .frame(width: 400, height: 350)
-                Image("startButton")
-                    .resizable()
-                    .frame(width: 200, height: 120)
-                    .onTapGesture {
-                        
+           
+                VStack{
+                    Image("title3")
+                        .resizable()
+                        .frame(width: 400, height: 350)
+                    
+                    
+                    NavigationLink {
+                        EventsPageView()
+                    } label: {
+                        Image("startButton")
+                            .resizable()
+                            .frame(width: 200, height: 120)
+                    }
+                    
+                }
+            
                     }
                 
                 
             }
         }
     }
-}
+
