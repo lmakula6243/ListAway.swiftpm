@@ -1,41 +1,58 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var xPosition:CGFloat = -330
+    @State var xPosition:CGFloat = -550
     @State var yPosition:CGFloat = 0
     
     var body: some View {
-        VStack {
-       
+        ZStack {
             
             
-            Image(systemName: "photo.artframe")
-                
-                
+            
+            Image("BG")
+            
+            
             
                 .resizable()
-                .frame(width: 1000,height: 1000)
+                .frame(width: 1500,height: 1000)
                 .offset(x: xPosition, y: yPosition)
                 .onAppear{
                     withAnimation(.easeIn.speed(0.1).repeatForever()){
-                        xPosition += 500
+                        xPosition += 1100
                         
-                        if xPosition == 170{
-                            withAnimation(.default.speed(0.001).delay(0.001).repeatForever()){
-                                xPosition += -500
-                                if xPosition == -330 {
-                                    withAnimation(.default.speed(0.001).delay(0.001).repeatForever()){
-                                        xPosition += 500
+                        if xPosition == 550{
+                            withAnimation(.easeInOut.speed(-5).repeatForever()){
+                                xPosition += -1100
+                                if xPosition == -550 {
+                                    withAnimation(.easeInOut.speed(-5).repeatForever()){
+                                        xPosition += 1100
                                         
                                     }
+                                    
+                                    
+                                    
                                 }
+                                
+                            }
+                            
+                        }
+                        
                     }
+                    
                 }
-           
-                }
-            }
-            
+            VStack {
+                Image("title3")
+                    .resizable()
+                    .frame(width: 400, height: 350)
+                Image("startButton")
+                    .resizable()
+                    .frame(width: 200, height: 120)
+                    .onTapGesture {
+                        
+                    }
                 
+                
+            }
         }
     }
 }
