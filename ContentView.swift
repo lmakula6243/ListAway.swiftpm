@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State var xPosition: CGFloat = -550
     @State var yPosition: CGFloat = 0
-    
+   @State var NewEventName = ""
     var body: some View {
         NavigationView {
             ZStack {
@@ -22,12 +22,15 @@ struct ContentView: View {
                         xPosition = 550
                        
                     }
+                   
                     
                 
                 VStack {
                     Image("title4")
                         .resizable()
                         .frame(width: 400, height: 350)
+                        .shadow(radius: 50)
+                    
                     
                     NavigationLink {
                         EventsPageView()
@@ -35,6 +38,7 @@ struct ContentView: View {
                         Image("startButton")
                             .resizable()
                             .frame(width: 200, height: 120)
+                            .shadow(radius: 20)
                     }
                 }
             }
