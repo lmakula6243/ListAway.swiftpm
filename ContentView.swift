@@ -12,7 +12,6 @@ struct ContentView: View {
                     .frame(width: 1500, height: 1000)
                     .offset(x: xPosition, y: yPosition)
                     .onAppear {
-                        print(xPosition)
 
                         withAnimation(Animation.easeInOut(duration: 10).repeatForever(autoreverses: true)) {
                             // auto reverse: -550 ➡️ 550 ➡️ -550 ➡️ 550... (looping)
@@ -21,12 +20,12 @@ struct ContentView: View {
                     }
                     .onDisappear {
                         xPosition = 550
-                        print(xPosition)
+                       
                     }
                     
                 
                 VStack {
-                    Image("title3")
+                    Image("title4")
                         .resizable()
                         .frame(width: 400, height: 350)
                     
