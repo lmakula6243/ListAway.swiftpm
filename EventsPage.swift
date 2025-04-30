@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct EventsPageView: View {
-   
+    @State var showEventsTextfield = false
+    @State var event = ""
     var body: some View {
-        NavigationView {
+    
             ZStack {
                 Image("EventsPageBackground")
                     .resizable()
@@ -21,22 +22,23 @@ struct EventsPageView: View {
                     .frame(width: 450, height: 150)
                     .offset(y:-310)
                     .shadow(radius: 10)
-            VStack {
-                Divider()
-                HStack {
-                    Text("Add a New Event                                             ")
-                    NavigationLink {
-                        NewEvent()
-                        
-                    } label: {
-                        Image("plus1")
-                            .resizable()
-                            .frame(width: 60, height: 50)
+                Button {
+                    showEventsTextfield = true
+                    if showEventsTextfield == true {
+                        TextField("Enter your event", text: $event)
                     }
-                    
-                    
+
+                } label: {
+                    Image("AddEvent")
+                        .resizable()
+                        .frame(width: 150,height: 150)
+                        .offset(y:-240)
+                        .shadow(radius: 10)
+                
                 }
-                Divider()
+               
+            
+          
                 ZStack {
                     Image(systemName: "square")
                         .resizable()
@@ -46,7 +48,7 @@ struct EventsPageView: View {
             }
         }
     }
-}
+
     struct EventsPage_Previews: PreviewProvider {
         static var previews: some View {
             Group {
@@ -54,5 +56,5 @@ struct EventsPageView: View {
             }
         }
     }
-    }
+    
 

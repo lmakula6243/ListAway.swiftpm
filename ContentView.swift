@@ -29,7 +29,7 @@ struct ContentView: View {
                     Image("title4")
                         .resizable()
                         .frame(width: 400, height: 350)
-                        .shadow(radius: 50)
+                        .shadow(radius: 5)
                     
                     
                     NavigationLink {
@@ -47,5 +47,7 @@ struct ContentView: View {
         
     }
 }
+
+
 
 
