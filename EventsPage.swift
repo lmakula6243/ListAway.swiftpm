@@ -11,44 +11,48 @@ struct EventsPageView: View {
     @State var showEventsTextfield = false
     @State var event = ""
     var body: some View {
-    
-            ZStack {
-                Image("EventsPageBackground")
-                    .resizable()
-                    .frame(height: 890)
-                    .offset(y:-20)
-                Image("eventsTitle")
-                    .resizable()
-                    .frame(width: 450, height: 150)
-                    .offset(y:-310)
-                    .shadow(radius: 10)
+        ZStack {
+            // Background images
+            Image("EventsPageBackground")
+                .resizable()
+                .frame(height: 890)
+                .offset(y: -20)
+            Image("eventsTitle")
+                .resizable()
+                .frame(width: 450, height: 150)
+                .offset(y: -310)
+                .shadow(radius: 10)
+         
+            VStack(spacing: 20) {
+               
+                
                 Button {
                     showEventsTextfield = true
-                    if showEventsTextfield == true {
-                        TextField("Enter your event", text: $event)
-                    }
-
                 } label: {
                     Image("AddEvent")
                         .resizable()
                         .frame(width: 150,height: 150)
-                        .offset(y:-240)
                         .shadow(radius: 10)
+                }
+                .padding(.bottom)
                 
+                if showEventsTextfield {
+                    TextField("Enter your event", text: $event)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
+                        .background(Color.white)
                 }
-               
-            
-          
-                ZStack {
-                    Image(systemName: "square")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                    
-                }
+                
+                Spacer()
             }
+            
         }
+        
+        
+        
+        
     }
-
+    
     struct EventsPage_Previews: PreviewProvider {
         static var previews: some View {
             Group {
@@ -57,4 +61,5 @@ struct EventsPageView: View {
         }
     }
     
-
+    
+}
