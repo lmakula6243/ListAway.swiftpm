@@ -10,6 +10,7 @@ import SwiftUI
 struct EventsPageView: View {
     @State var showEventsTextfield = false
     @State var event = ""
+    @State var eventsArray = [""]
     var body: some View {
         ZStack {
             // Background images
@@ -17,14 +18,15 @@ struct EventsPageView: View {
                 .resizable()
                 .frame(height: 890)
                 .offset(y: -20)
+            
             Image("eventsTitle")
                 .resizable()
                 .frame(width: 450, height: 150)
                 .offset(y: -310)
                 .shadow(radius: 10)
-         
-            VStack(spacing: 20) {
-               
+            
+            VStack{
+                
                 
                 Button {
                     showEventsTextfield = true
@@ -35,31 +37,38 @@ struct EventsPageView: View {
                         .shadow(radius: 10)
                 }
                 .padding(.bottom)
-                
+                .offset(x:00,y:150)
                 if showEventsTextfield {
-                    TextField("Enter your event", text: $event)
-                        .textFieldStyle(.roundedBorder)
-                        .padding()
-                        .background(Color.white)
+                    TextField("     Enter your event", text: $event)      .foregroundColor(.red)                .background(Color.white.opacity(0.3))
+                        .cornerRadius(12)
+                        .shadow(color: .orange.opacity(0.9), radius: 5, x: 0, y: 5)
+                        .font(.custom("Courier New", size: 30))
+                        .bold()
+                        .offset(x:00,y:150)
+                        .onSubmit {
+                            eventsArray.append(event)
+                        }
+                    ForEach(eventsArray, id: \.self) { event in
+                        NavigationLink {
+                            EventsSmallView()
+                        } label: {
+                            Image("plus1")
+                        }
+                        Spacer()
+                    }
+                    
                 }
-                
-                Spacer()
             }
             
+            
+        }
         }
         
-        
-        
-        
-    }
-    
-    struct EventsPage_Previews: PreviewProvider {
-        static var previews: some View {
-            Group {
-                EventsPageView()
+        struct EventsPage_Previews: PreviewProvider {
+            static var previews: some View {
+                Group {
+                    EventsPageView()
+                }
             }
         }
-    }
-    
-    
 }
