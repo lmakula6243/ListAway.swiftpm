@@ -53,7 +53,13 @@ struct EventsPageView: View {
                             EventsSmallView()
                         } label: {
                             Image("plus1")
+                                .resizable()
+                                .frame(width: 160,height: 140)
+                                .offset(x: -100, y:200)
+                            Text("\(event)")
+                                .offset(x: -100, y:200)
                         }
+                        
                         Spacer()
                     }
                     
