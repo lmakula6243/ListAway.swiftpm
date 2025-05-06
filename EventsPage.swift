@@ -50,7 +50,7 @@ struct EventsPageView: View {
                         }
                     ForEach(eventsArray, id: \.self) { event in
                         NavigationLink {
-                            EventsSmallView()
+                            EventsSmallView( event: $event)
                         } label: {
                             Image("plus1")
                                 .resizable()
