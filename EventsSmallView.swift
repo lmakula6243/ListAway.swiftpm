@@ -10,14 +10,14 @@ struct EventsSmallView: View {
     @State var NewItemName = ""
     @State var NewItemQuantity: Int?
     @State var showList: Bool = false
-    @Binding var event: String
+    @State var event: String
     var body: some View {
         VStack {
             Text(event)
             TextField("Add an Item to pack", text: $NewItemName)
             TextField("Enter the quanity", value: $NewItemQuantity, format: .number)
             Button {
-                let newItem = PackingItem(name: NewItemName, quantity: NewItemQuantity!)
+                let newItem = PackingItem(name: NewItemName, quantity: NewItemQuantity ?? 1)
                 items.append(newItem)
             } label: {
                 Image(systemName: "plus")
