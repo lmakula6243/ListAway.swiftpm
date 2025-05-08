@@ -10,7 +10,7 @@ struct EventsSmallView: View {
     @State var NewItemName = ""
     @State var NewItemQuantity: Int?
     @State var showList: Bool = false
-    @Binding var event: String
+    @State var event: String
     var body: some View {
         VStack {
             Text(event)

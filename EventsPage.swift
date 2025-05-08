@@ -19,36 +19,37 @@ struct EventsPageView: View {
     
     let columns = [
         GridItem(.adaptive(minimum: 150))]
-   
+    
     var body: some View {
-        ZStack {
-            // Background image
-            Image("EventsPageBackground")
-                .resizable()
-                .frame(height: 890)
-                .offset(y: -20)
-
-            // Title image at the top
-            Image("eventsTitle")
-                .resizable()
-                .frame(width: 450, height: 150)
-                .offset(y: -310)
-                .shadow(color: .gray, radius: 10)
-                .shadow(color: .white, radius: 10)
-
-            // Button to show the event input field
-            Button {
-                showEventsTextfield = true
-            } label: {
-                Image("AddEvent")
+        NavigationStack {
+            ZStack {
+                // Background image
+                Image("EventsPageBackground")
                     .resizable()
-                    .frame(width: 150, height: 150)
-                    .shadow(color: .yellow, radius: 10)
-            }
-            .offset(x: 0, y: -240)
-
-            // Show the TextField only when toggled
-        
+                    .frame(height: 890)
+                    .offset(y: -20)
+                
+                // Title image at the top
+                Image("eventsTitle")
+                    .resizable()
+                    .frame(width: 450, height: 150)
+                    .offset(y: -310)
+                    .shadow(color: .gray, radius: 10)
+                    .shadow(color: .white, radius: 10)
+                
+                // Button to show the event input field
+                Button {
+                    showEventsTextfield = true
+                } label: {
+                    Image("AddEvent")
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .shadow(color: .yellow, radius: 10)
+                }
+                .offset(x: 0, y: -240)
+                
+                // Show the TextField only when toggled
+                
                 if showEventsTextfield {
                     
                     TextField("Enter your event name", text: $event)
@@ -63,11 +64,13 @@ struct EventsPageView: View {
                             eventsArray.append(event)
                         }
                 }
-            LazyVGrid(columns: columns, spacing: 20) {
-                // Display the added events as styled text
-                if !eventsArray.isEmpty {
-                    ForEach(eventsArray, id: \.self) { event in
-                        Text(event)
+                LazyVGrid(columns: columns, spacing: 20) {
+                    // Display the added events as styled text
+                    if !eventsArray.isEmpty {
+                        ForEach(eventsArray, id: \.self) { event in
+                            NavigationLink(event, destination: {
+                                EventsSmallView(event: event)
+                            })
                             .font(.custom("MarkerFelt-Wide", size: 24))
                             .foregroundColor(.white)
                             .bold()
@@ -78,16 +81,16 @@ struct EventsPageView: View {
                                     .fill(Color(red: 1.0, green: 0.8, blue: 0.85))
                                     .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
                             )
-
-            
+                            
+                            
+                        }
                     }
                 }
+                Spacer() // Pushes everything up inside ZStack
             }
-            Spacer() // Pushes everything up inside ZStack
         }
     }
 }
-
 // SwiftUI preview
 struct EventsPage_Previews: PreviewProvider {
     static var previews: some View {
