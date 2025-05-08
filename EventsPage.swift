@@ -8,44 +8,50 @@ import SwiftUI
 
 // Main view for the Events page
 struct EventsPageView: View {
-    // 🔘 Controls if the textfield shows up or not
+    // State variable to show or hide the TextField
     @State var showEventsTextfield = false
-    // ✍️ Holds the user's current input
+    
+    // Holds the user's input for a new event
     @State var event = ""
-    // 📦 Stores all the events the user adds
-    @State var eventsArray: [String] = []// starts with an empty string
-   
+    
+    // Stores the list of events the user adds
+    @State var eventsArray: [String] = []
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 150))]
     
     var body: some View {
         NavigationStack {
             ZStack {
-                // 🖼️ Background image for the whole page
+                // Background image
                 Image("EventsPageBackground")
                     .resizable()
                     .frame(height: 890)
                     .offset(y: -20)
                 
-                // 🖼️ Title image at the top of the page
+                // Title image at the top
                 Image("eventsTitle")
                     .resizable()
                     .frame(width: 450, height: 150)
                     .offset(y: -310)
-                    .shadow(color: .gray,radius: 10)
-                    .shadow(color: .white,radius: 10)
+                    .shadow(color: .gray, radius: 10)
+                    .shadow(color: .white, radius: 10)
                 
+                // Button to show the event input field
                 Button {
                     showEventsTextfield = true
                 } label: {
-                    
-                    Image("AddEvent") // 🖼️ The image used as a button
+                    Image("AddEvent")
                         .resizable()
-                        .frame(width: 150,height: 150)
-                        .shadow(color: .yellow,radius: 10)
-                    
+                        .frame(width: 150, height: 150)
+                        .shadow(color: .yellow, radius: 10)
                 }
-                .offset(x:00,y:-240)
+                .offset(x: 0, y: -240)
+                
+                // Show the TextField only when toggled
                 
                 if showEventsTextfield {
+                    
                     TextField("Enter your event name", text: $event)
                         .foregroundColor(.red)
                         .background(Color.white.opacity(0.3))
@@ -58,26 +64,26 @@ struct EventsPageView: View {
                             eventsArray.append(event)
                         }
                 }
-                
-                if !eventsArray.isEmpty {
-                    ForEach(eventsArray, id: \.self) { event in
-                        NavigationLink(event, destination: {
-                            EventsSmallView(event: event)
-                        })
-                        .font(.custom("MarkerFelt-Wide", size: 24))
-                        .foregroundColor(.white)
-                        .bold()
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(
-                            Capsule()
-                                .fill(Color(red: 1.0, green: 0.8, blue: 0.85))
-                                .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
-                        )
-                        .offset(x: -105, y: 290)
-                        
-                        
-                        
+                LazyVGrid(columns: columns, spacing: 20) {
+                    // Display the added events as styled text
+                    if !eventsArray.isEmpty {
+                        ForEach(eventsArray, id: \.self) { event in
+                            NavigationLink(event, destination: {
+                                EventsSmallView(event: event)
+                            })
+                            .font(.custom("MarkerFelt-Wide", size: 24))
+                            .foregroundColor(.white)
+                            .bold()
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .background(
+                                Capsule()
+                                    .fill(Color(red: 1.0, green: 0.8, blue: 0.85))
+                                    .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                            )
+                            
+                            
+                        }
                     }
                 }
                 
@@ -88,12 +94,9 @@ struct EventsPageView: View {
         }
     }
 }
-
-// 🧪 Preview in SwiftUI Canvas
+// SwiftUI preview
 struct EventsPage_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            EventsPageView()
-        }
+        EventsPageView()
     }
 }
