@@ -17,7 +17,7 @@ struct EventsSmallView: View {
             TextField("Add an Item to pack", text: $NewItemName)
             TextField("Enter the quanity", value: $NewItemQuantity, format: .number)
             Button {
-                let newItem = PackingItem(name: NewItemName, quantity: NewItemQuantity!)
+                let newItem = PackingItem(name: NewItemName, quantity: NewItemQuantity ?? 1)
                 items.append(newItem)
             } label: {
                 Image(systemName: "plus")

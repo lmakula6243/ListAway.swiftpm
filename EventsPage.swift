@@ -87,7 +87,10 @@ struct EventsPageView: View {
                     }
                 }
                 
+                
+                Spacer() // 🧱 pushes content up
             }
+            
         }
     }
 }
