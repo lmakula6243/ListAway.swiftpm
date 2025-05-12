@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PackingItem: Hashable {
+struct PackingItem: Codable, Hashable {
     var name: String
     var quantity: Int
     

@@ -19,6 +19,7 @@ struct EventsSmallView: View {
             Button {
                 let newItem = PackingItem(name: NewItemName, quantity: NewItemQuantity ?? 1)
                 items.append(newItem)
+                saveItems()
             } label: {
                 Image(systemName: "plus")
             }
@@ -32,12 +33,33 @@ struct EventsSmallView: View {
                         
                     
                 }
+                    .onDelete { MyIndex in
+                        items.remove(atOffsets: MyIndex)
+                       
+                        
+                    }
             }
+                
+                .onAppear(){
+                   items = loadItems(event: event)
+                }
+            
             
         }
     }
 }
 
 
+extension EventsSmallView {
+    func saveItems() {
+        UserDefaults.standard.set(try? JSONEncoder().encode(items), forKey: event)
+    }
     
-
+    
+    func loadItems(event: String) -> [PackingItem] {
+        guard let data = UserDefaults.standard.data(forKey: event) else {
+            return []
+        }
+        return try! JSONDecoder().decode([PackingItem].self, from: data)
+    }
+}

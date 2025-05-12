@@ -15,10 +15,15 @@ struct EventsPageView: View {
     @State var event = ""
     
     // Stores the list of events the user adds
-    @State var eventsArray: [String] = []
+    @State var eventsArray: [String] = [] {
+        didSet {
+            UserDefaults.standard.set(eventsArray, forKey: eventsKey)
+        }
+    }
     
     let columns = [
         GridItem(.adaptive(minimum: 150))]
+    let eventsKey = "savedEvents"
     
     var body: some View {
         NavigationStack {
@@ -62,26 +67,33 @@ struct EventsPageView: View {
                         .offset(x: 35, y: -130)
                         .onSubmit {
                             eventsArray.append(event)
+                            
                         }
                 }
                 LazyVGrid(columns: columns, spacing: 20) {
                     // Display the added events as styled text
                     if !eventsArray.isEmpty {
-                        ForEach(eventsArray, id: \.self) { event in
-                            NavigationLink(event, destination: {
-                                EventsSmallView(event: event)
-                            })
-                            .font(.custom("MarkerFelt-Wide", size: 24))
-                            .foregroundColor(.white)
-                            .bold()
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-                            .background(
-                                Capsule()
-                                    .fill(Color(red: 1.0, green: 0.8, blue: 0.85))
-                                    .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
-                            )
-                            
+                    
+                            ForEach(eventsArray, id: \.self) { event in
+                                NavigationLink(event, destination: {
+                                    EventsSmallView(event: event)
+                                })
+                                .font(.custom("MarkerFelt-Wide", size: 24))
+                                .foregroundColor(.white)
+                                .bold()
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 10)
+                                .background(
+                                    Capsule()
+                                        .fill(Color(red: 1.0, green: 0.8, blue: 0.85))
+                                        .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                                )
+                            }
+                    
+                            .onAppear {
+                                if let savedEvents = UserDefaults.standard.stringArray(forKey: "savedEvents") {
+                                    eventsArray = savedEvents
+                                }
                             
                         }
                     }
@@ -92,8 +104,13 @@ struct EventsPageView: View {
             }
             
         }
+        
+        }
     }
-}
+
+
+
+
 // SwiftUI preview
 struct EventsPage_Previews: PreviewProvider {
     static var previews: some View {
