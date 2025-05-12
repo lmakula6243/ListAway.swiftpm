@@ -10,6 +10,7 @@ import SwiftUI
 struct NewEvent: View {
     var body: some View {
         Text("New Event")
+        Text("Hi")
     }
 }
 
