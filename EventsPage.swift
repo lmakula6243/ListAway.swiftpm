@@ -3,6 +3,7 @@ import SwiftUI
 struct EventsPageView: View {
     @State var showEventsTextfield = false
     @State var event = ""
+   
     
     // Stores the list of events the user adds
     @State var eventsArray: [String] = [] {
@@ -25,7 +26,7 @@ struct EventsPageView: View {
                     .resizable()
                     .frame(height: 890)
                     .offset(y: -50)
-                
+              
                 VStack(spacing: 20) {
                     // Title image at the top
                     Image("eventsTitle")
@@ -44,18 +45,6 @@ struct EventsPageView: View {
                             .shadow(color: .yellow, radius: 10)
                     }
                     .offset(y: -90)
-                    NavigationLink(destination: ChatBotView()) {
-                        Text("Open AI Bot for suggestions")
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
-                            .shadow(radius: 5)
-                            .padding(.horizontal)
-                    }
-                    .offset(y: 400)
-                    
                     
                     // TextField for event name input, shown when triggered
                     if showEventsTextfield {
@@ -66,7 +55,7 @@ struct EventsPageView: View {
                             .shadow(color: .orange.opacity(0.9), radius: 5, x: 0, y: 5)
                             .font(.custom("Courier New", size: 30))
                             .bold()
-                            .offset(x: 35, y: -130)
+                            .offset(x: 35, y: -100)
                             .onSubmit {
                                 if !event.trimmingCharacters(in: .whitespaces).isEmpty {
                                     eventsArray.append(event)
@@ -97,24 +86,67 @@ struct EventsPageView: View {
                         }
                         
                     }
-                    
-                    
-                    Spacer() // 🧱 pushes content up
+                    Button(action: {
+                                     eventsArray.removeAll() // Clear the events array
+                                 }) {
+                                     HStack {
+                                         Image(systemName: "trash.fill") // Trash icon
+                                             .foregroundColor(.white)
+                                             .font(.system(size: 25))
+                                     }
+                                     .padding()
+                                     .background(Capsule().fill(Color.pink))
+                                     .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                                 }
+                                 .offset(x: 150, y: 50)
+                
+                            NavigationStack {
+                                VStack {
+                                    NavigationLink(destination: ChatBotView()) {
+                                        Text("Open AI Bot 💬")
+                                            .font(.custom("MarkerFelt-Wide", size: 20))
+                                            .foregroundColor(.white)
+                                            .bold()
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 12)
+                                            .background(
+                                                Capsule()
+                                                    .fill(
+                                                        LinearGradient(
+                                                            gradient: Gradient(colors: [
+                                                                Color.pink,
+                                                                Color.yellow,
+                                                                Color.blue
+                                                            ]),
+                                                            startPoint: .topLeading,
+                                                            endPoint: .bottomTrailing
+                                                        )
+                                                    )
+                                                    .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                                            )
+                                    }
+                                }
+                                .offset(y: -40)
+                                .padding()
+                            }
+                     
+                        Spacer() // 🧱 pushes content up
+                    }
+                }
+            }
+            .onAppear {
+                
+                if let savedEvents = UserDefaults.standard.stringArray(forKey: eventsKey) {
+                    eventsArray = savedEvents
                 }
             }
         }
-        .onAppear {
-            // Load saved events when the view appears
-            if let savedEvents = UserDefaults.standard.stringArray(forKey: eventsKey) {
-                eventsArray = savedEvents
-            }
+    }
+    
+    struct EventsPage_Previews: PreviewProvider {
+        static var previews: some View {
+            EventsPageView()
         }
     }
-}
-
-struct EventsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        EventsPageView()
-    }
-}
+    
 
