@@ -130,7 +130,7 @@ struct EventsPageView: View {
                                 .padding()
                             }
                      
-                        Spacer() // 🧱 pushes content up
+                        Spacer() //  pushes stufg up
                     }
                 }
             }
