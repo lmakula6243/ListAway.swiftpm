@@ -16,7 +16,9 @@ struct ListView: View {
                 .leading) {
             HStack {
                 Text(currentItem.name)
-                    .font(.largeTitle)
+                    .font(.custom("Chalkboard SE", size: 40))
+                    .foregroundStyle(.pink)
+                    
                 Spacer()
                 Button {
                     completedItem.toggle()
@@ -34,8 +36,10 @@ struct ListView: View {
                 
             }
                     Divider()
-            Text("quantity: \(currentItem.quantity)")
-                        .font(.title)
+            Text("Quantity: \(currentItem.quantity)")
+                        .font(.custom("Chalkboard SE", size: 25))
+                        .foregroundStyle(.gray)
+                       
                     }
     }
 }

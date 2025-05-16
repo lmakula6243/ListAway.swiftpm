@@ -29,7 +29,7 @@ struct EventsSmallView: View {
 
             VStack(spacing: 15) {
                 Text(event)
-                    .font(.title)
+                    .font(.custom("Chalkboard SE", size: 50))
                     .bold()
                     .foregroundColor(.pink)
 
