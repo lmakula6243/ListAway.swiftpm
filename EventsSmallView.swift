@@ -51,6 +51,8 @@ struct EventsSmallView: View {
                     let newItem = PackingItem(name: NewItemName, quantity: NewItemQuantity ?? 1)
                     items.append(newItem)
                     saveItems()
+                    NewItemName = ""
+                    NewItemQuantity = nil
                 } label: {
                     Image(systemName: "plus")
                         .padding()

@@ -17,7 +17,9 @@ struct EventsPageView: View {
         GridItem(.flexible())
     ]
     let eventsKey = "savedEvents"
-    
+    @State var eventDay: Int?
+    @State var eventMonth: Int?
+    @State var eventYear: Int?
     var body: some View {
         NavigationStack {
             ZStack {
@@ -47,22 +49,37 @@ struct EventsPageView: View {
                     .offset(y: -90)
                     
                     // TextField for event name input, shown when triggered
-                    if showEventsTextfield {
-                        TextField("Enter your event name", text: $event)
+                    VStack {
+                        if showEventsTextfield {
+                            TextField("Enter your event name", text: $event)
+                                .foregroundColor(.red)
+                                .background(Color.white.opacity(0.3))
+                                .cornerRadius(12)
+                                .shadow(color: .orange.opacity(0.9), radius: 5, x: 0, y: 5)
+                                .font(.custom("Courier New", size: 30))
+                                .bold()
+                                .offset(x: 35, y: -100)
+                                .onSubmit {
+                                    if !event.trimmingCharacters(in: .whitespaces).isEmpty {
+                                        eventsArray.append(event)
+                                        event = ""
+                                        showEventsTextfield = false
+                                    }
+                                }
+                            HStack {
+                                TextField("Day", value: $eventDay, format: .number)
+                                TextField("Month", value: $eventMonth, format: .number)
+                                TextField("Year", value: $eventYear, format: .number)
+                            }
                             .foregroundColor(.red)
                             .background(Color.white.opacity(0.3))
                             .cornerRadius(12)
                             .shadow(color: .orange.opacity(0.9), radius: 5, x: 0, y: 5)
-                            .font(.custom("Courier New", size: 30))
+                            .font(.custom("Courier New", size: 20))
                             .bold()
-                            .offset(x: 35, y: -100)
-                            .onSubmit {
-                                if !event.trimmingCharacters(in: .whitespaces).isEmpty {
-                                    eventsArray.append(event)
-                                    event = ""
-                                    showEventsTextfield = false
-                                }
-                            }
+                            .offset(x: 35, y: -10)
+                            
+                        }
                     }
                     
                     // Scrollable grid with 2 columns for events

@@ -19,8 +19,8 @@ let package = Package(
             bundleIdentifier: "org.jhhs.626243.ListAway",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .gamepad),
-            accentColor: .presetColor(.orange),
+            appIcon: .placeholder(icon: .cloud),
+            accentColor: .presetColor(.pink),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
