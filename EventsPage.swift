@@ -117,36 +117,62 @@ struct EventsPageView: View {
                                  }
                                  .offset(x: 150, y: 50)
                 
-                            NavigationStack {
-                                VStack {
-                                    NavigationLink(destination: ChatBotView()) {
-                                        Text("Open AI Bot 💬")
-                                            .font(.custom("MarkerFelt-Wide", size: 20))
-                                            .foregroundColor(.white)
-                                            .bold()
-                                            .padding(.horizontal, 20)
-                                            .padding(.vertical, 12)
-                                            .background(
-                                                Capsule()
-                                                    .fill(
-                                                        LinearGradient(
-                                                            gradient: Gradient(colors: [
-                                                                Color.pink,
-                                                                Color.yellow,
-                                                                Color.blue
-                                                            ]),
-                                                            startPoint: .topLeading,
-                                                            endPoint: .bottomTrailing
-                                                        )
-                                                    )
-                                                    .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                    VStack(spacing: 15) {
+                        NavigationLink(destination: ChatBotView()) {
+                            Text("Open AI Bot 💬")
+                                .font(.custom("MarkerFelt-Wide", size: 20))
+                                .foregroundColor(.white)
+                                .bold()
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 12)
+                                .background(
+                                    Capsule()
+                                        .fill(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color.pink,
+                                                    Color.yellow,
+                                                    Color.blue
+                                                ]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
                                             )
-                                    }
-                                }
-                                .offset(y: -40)
-                                .padding()
-                            }
-                     
+                                        )
+                                        .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                                )
+                        }
+
+                        NavigationLink(destination: premadelistView()) {
+                            Text("Pre-made lists 📝")
+                                .font(.custom("ChalkboardSE-Bold", size: 20))
+                                .foregroundColor(.white)
+                                .bold()
+                                .padding(.horizontal, 25)
+                                .padding(.vertical, 14)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color.orange,
+                                                    Color.mint,
+                                                    Color.cyan
+                                                ]),
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                        )
+                                        .shadow(color: Color.orange.opacity(0.4), radius: 8, x: 0, y: 4)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.white.opacity(0.3), lineWidth: 2)
+                                )
+                        }
+                    }
+                    .offset(y: -40)
+                    .padding()
+
                         Spacer() //  pushes stufg up
                     }
                 }
