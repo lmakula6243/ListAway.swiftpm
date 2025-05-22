@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct NewEvent: View {
-    var body: some View {
-        
-            
-        }
-    }
+struct Event: Codable, Hashable {
+    var name: String
+    var day: Int
+    var month: Int
+    var year: Int
     
-
+}

@@ -3,7 +3,7 @@ import SwiftUI
 struct EventsPageView: View {
     @State var showEventsTextfield = false
     @State var event = ""
-   
+    
     
     // Stores the list of events the user adds
     @State var eventsArray: [String] = [] {
@@ -28,7 +28,7 @@ struct EventsPageView: View {
                     .resizable()
                     .frame(height: 890)
                     .offset(y: -50)
-              
+                
                 VStack(spacing: 20) {
                     // Title image at the top
                     Image("eventsTitle")
@@ -66,11 +66,14 @@ struct EventsPageView: View {
                                         showEventsTextfield = false
                                     }
                                 }
+                            
                             HStack {
                                 TextField("Day", value: $eventDay, format: .number)
+                                
                                 TextField("Month", value: $eventMonth, format: .number)
                                 TextField("Year", value: $eventYear, format: .number)
                             }
+                            
                             .foregroundColor(.red)
                             .background(Color.white.opacity(0.3))
                             .cornerRadius(12)
@@ -80,43 +83,47 @@ struct EventsPageView: View {
                             .offset(x: 35, y: -10)
                             
                         }
-                    }
-                    
-                    // Scrollable grid with 2 columns for events
-                    ScrollView {
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(eventsArray, id: \.self) { event in
-                                NavigationLink(destination: EventsSmallView(event: event)) {
-                                    Text(event)
-                                        .font(.custom("MarkerFelt-Wide", size: 20))
-                                        .foregroundColor(.white)
-                                        .bold()
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 10)
-                                        .background(
-                                            Capsule()
-                                                .fill(Color(red: 1.0, green: 0.8, blue: 0.85))
-                                                .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
-                                        )
+                           
+                            
+                            // Scrollable grid with 2 columns for events
+                            ScrollView {
+                                LazyVGrid(columns: columns, spacing: 20) {
+                                    ForEach(eventsArray, id: \.self) { event in
+                                        NavigationLink(destination: EventsSmallView(event: event)) {
+                                            VStack {
+                                                Text(event)
+                                                    .font(.custom("MarkerFelt-Wide", size: 30))
+                                                Text("\(eventDay ?? 0)/\(eventMonth ?? 0)/\(eventYear ?? 0)")
+                                                    .font(.custom("MarkerFelt-Wide", size: 15))
+                                            }
+                                            .foregroundColor(.white)
+                                            .bold()
+                                            .padding(.horizontal, 10)
+                                            .padding(.vertical, 10)
+                                            .background(
+                                                Capsule()
+                                                    .fill(Color(red: 1.0, green: 0.8, blue: 0.85))
+                                                    .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                                            )
+                                        }
+                                    }
                                 }
+                                
                             }
-                        }
-                        
-                    }
-                    Button(action: {
-                                     eventsArray.removeAll() // Clear the events array
-                                 }) {
-                                     HStack {
-                                         Image(systemName: "trash.fill") // Trash icon
-                                             .foregroundColor(.white)
-                                             .font(.system(size: 25))
-                                     }
-                                     .padding()
-                                     .background(Capsule().fill(Color.pink))
-                                     .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
-                                 }
-                                 .offset(x: 150, y: 50)
-                
+                            Button(action: {
+                                eventsArray.removeAll() // Clear the events array
+                            }) {
+                                HStack {
+                                    Image(systemName: "trash.fill") // Trash icon
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 25))
+                                }
+                                .padding()
+                                .background(Capsule().fill(Color.pink))
+                                .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                            }
+                            .offset(x: 150, y: 50)
+                            
                             NavigationStack {
                                 VStack {
                                     NavigationLink(destination: ChatBotView()) {
@@ -146,24 +153,28 @@ struct EventsPageView: View {
                                 .offset(y: -40)
                                 .padding()
                             }
-                     
-                        Spacer() //  pushes stufg up
+                            
+                            Spacer() //  pushes stufg up
+                        }
+                    }
+                }
+                .onAppear {
+                    
+                    if let savedEvents = UserDefaults.standard.stringArray(forKey: eventsKey) {
+                        eventsArray = savedEvents
                     }
                 }
             }
-            .onAppear {
-                
-                if let savedEvents = UserDefaults.standard.stringArray(forKey: eventsKey) {
-                    eventsArray = savedEvents
-                }
+        }
+        
+        struct EventsPage_Previews: PreviewProvider {
+            static var previews: some View {
+                EventsPageView()
             }
         }
-    }
-    
-    struct EventsPage_Previews: PreviewProvider {
-        static var previews: some View {
-            EventsPageView()
-        }
+        
+        
+        
     }
     
 
