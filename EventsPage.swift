@@ -108,19 +108,23 @@ struct EventsPageView: View {
                                 IndividualEventView(currentEvent: eventItem)
                             }
                         }
-
-                        Button(action: {
-                            eventsArray.removeAll()
-                        }) {
-                            Image(systemName: "trash.fill")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25))
-                                .padding()
-                                .background(Capsule().fill(Color.pink))
-                                .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
-                        }
-                        .padding(.top)
-
+                        
+                    }
+                    Button(action: {
+                                     eventsArray.removeAll() // Clear the events array
+                                 }) {
+                                     HStack {
+                                         Image(systemName: "trash.fill") // Trash icon
+                                             .foregroundColor(.white)
+                                             .font(.system(size: 25))
+                                     }
+                                     .padding()
+                                     .background(Capsule().fill(Color.pink))
+                                     .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
+                                 }
+                                 .offset(x: 150, y: 50)
+                
+                    VStack(spacing: 15) {
                         NavigationLink(destination: ChatBotView()) {
                             Text("Open AI Bot 💬")
                                 .font(.custom("MarkerFelt-Wide", size: 20))
@@ -144,21 +148,56 @@ struct EventsPageView: View {
                                         .shadow(color: .pink.opacity(0.6), radius: 10, x: 0, y: 5)
                                 )
                         }
+
+                        NavigationLink(destination: PremadeListView()) {
+                            Text("Pre-made lists 📝")
+                                .font(.custom("ChalkboardSE-Bold", size: 20))
+                                .foregroundColor(.white)
+                                .bold()
+                                .padding(.horizontal, 25)
+                                .padding(.vertical, 14)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [
+                                                    Color.orange,
+                                                    Color.mint,
+                                                    Color.cyan
+                                                ]),
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                        )
+                                        .shadow(color: Color.orange.opacity(0.4), radius: 8, x: 0, y: 4)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.white.opacity(0.3), lineWidth: 2)
+                                )
+                        }
                         .padding(.top)
                     }
+                    .offset(y: -40)
+                    .padding()
 
-                    Spacer()
-                }
-                .padding()
-                .onAppear {
-                    if let data = UserDefaults.standard.data(forKey: eventsKey),
-                       let decoded = try? JSONDecoder().decode([Event].self, from: data) {
-                        eventsArray = decoded
+                        Spacer() //  pushes stufg up
                     }
+                }
+            }
+            .onAppear {
+                
+                if let savedEvents = UserDefaults.standard.stringArray(forKey: eventsKey) {
+                    eventsArray = savedEvents
                 }
             }
         }
     }
     
-}
+    struct EventsPage_Previews: PreviewProvider {
+        static var previews: some View {
+            EventsPageView()
+        }
+    }
+    
 
