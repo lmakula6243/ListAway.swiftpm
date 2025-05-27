@@ -142,7 +142,7 @@ struct EventsPageView: View {
                                 )
                         }
 
-                        NavigationLink(destination: premadelistView()) {
+                        NavigationLink(destination: PremadeListView()) {
                             Text("Pre-made lists 📝")
                                 .font(.custom("ChalkboardSE-Bold", size: 20))
                                 .foregroundColor(.white)
