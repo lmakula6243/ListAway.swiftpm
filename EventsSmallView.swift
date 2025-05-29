@@ -15,7 +15,7 @@ struct EventsSmallView: View {
 
     var body: some View {
         ZStack {
-            // 🌴 Tropical gradient background
+          
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color.yellow.opacity(0.4),
@@ -33,8 +33,7 @@ struct EventsSmallView: View {
                     .bold()
                     .foregroundColor(.pink)
 
-                // ✏️ Styled text field
-                TextField("Add an Item to pack", text: $NewItemName)
+                                TextField("Add an Item to pack", text: $NewItemName)
                     .padding()
                     .background(Color.white.opacity(0.8))
                     .cornerRadius(12)
@@ -46,7 +45,7 @@ struct EventsSmallView: View {
                     .cornerRadius(12)
                     .padding(.horizontal)
 
-                // ➕ Add item button
+               
                 Button {
                     let newItem = PackingItem(name: NewItemName, quantity: NewItemQuantity ?? 1)
                     items.append(newItem)
@@ -70,7 +69,7 @@ struct EventsSmallView: View {
                         .shadow(color: .pink.opacity(0.5), radius: 6, x: 0, y: 4)
                 }
 
-                // 📋 List of items
+               
                 List {
                     ForEach(items, id: \.self) { currentItem in
                         ListView(currentItem: currentItem)
