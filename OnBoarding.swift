@@ -36,9 +36,17 @@ struct OB1View: View {
                 Text("  ListAway Instructions")
                     .font(.custom("Chalkboard SE", size: 40))
                     .padding()
-                Image(systemName: "star")
-                    .resizable()
-                    .frame(width: 40, height: 40)
+                HStack {
+                    Image(systemName: "camera.macro")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                    Image(systemName: "list.bullet.clipboard")
+                        .resizable()
+                        .frame(width: 40, height: 50)
+                    Image(systemName: "camera.macro")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                }
             }
             .foregroundStyle(.white)
         }
@@ -62,15 +70,24 @@ struct OB2View: View {
                     Text("- Click the large plus button to create a new list!")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
+                    ZStack {
+                        Image(systemName: "plus.circle")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Image(systemName: "macwindow.and.cursorarrow")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                    }
                     Text("- Name your list based on your trip destination")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
+                    HStack {
+                        Image(systemName: "")
+                    }
                     Text("- Click enter to add the new destination")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
-                    Image(systemName: "star")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                    
                        
                 }
                 .foregroundStyle(.white)
