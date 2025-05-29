@@ -5,7 +5,7 @@ struct EventsPageView: View {
     @State var event = ""
    
     
-    // Stores the list of events the user adds
+   
     @State var eventsArray: [String] = [] {
         didSet {
             UserDefaults.standard.set(eventsArray, forKey: eventsKey)
@@ -18,26 +18,28 @@ struct EventsPageView: View {
     ]
     let eventsKey = "savedEvents"
     @State var eventDay: Int?
+    
+    
     @State var eventMonth: Int?
+    
     @State var eventYear: Int?
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background image
+               
                 Image("EventsPageBackground")
                     .resizable()
                     .frame(height: 890)
-                    .offset(y: -50)
+                    .offset(y: -40)
               
                 VStack(spacing: 20) {
-                    // Title image at the top
+                   
                     Image("eventsTitle")
                         .resizable()
                         .frame(width: 450, height: 150)
                         .shadow(color: .gray, radius: 10)
                         .shadow(color: .white, radius: 10)
-                    
-                    // Button to show the event input field
+                
                     Button {
                         showEventsTextfield = true
                     } label: {
@@ -46,16 +48,27 @@ struct EventsPageView: View {
                             .frame(width: 150, height: 150)
                             .shadow(color: .yellow, radius: 10)
                     }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     .offset(y: -90)
                     
-                    // TextField for event name input, shown when triggered
+                  
                     VStack {
+                        
                         if showEventsTextfield {
+                            
                             TextField("Enter your event name", text: $event)
+                            
                                 .foregroundColor(.red)
                                 .background(Color.white.opacity(0.3))
                                 .cornerRadius(12)
-                                .shadow(color: .orange.opacity(0.9), radius: 5, x: 0, y: 5)
+                                .shadow(color: .orange.opacity(0.9)
+                                        , radius: 5, x: 0, y: 5)
                                 .font(.custom("Courier New", size: 30))
                                 .bold()
                                 .offset(x: 35, y: -100)
@@ -82,7 +95,7 @@ struct EventsPageView: View {
                         }
                     }
                     
-                    // Scrollable grid with 2 columns for events
+                  
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(eventsArray, id: \.self) { event in
@@ -104,10 +117,10 @@ struct EventsPageView: View {
                         
                     }
                     Button(action: {
-                                     eventsArray.removeAll() // Clear the events array
+                                     eventsArray.removeAll()
                                  }) {
                                      HStack {
-                                         Image(systemName: "trash.fill") // Trash icon
+                                         Image(systemName: "trash.fill")
                                              .foregroundColor(.white)
                                              .font(.system(size: 25))
                                      }
@@ -168,28 +181,37 @@ struct EventsPageView: View {
                                     RoundedRectangle(cornerRadius: 25)
                                         .stroke(Color.white.opacity(0.3), lineWidth: 2)
                                 )
+                    
                         }
+                        
                     }
                     .offset(y: -40)
                     .padding()
 
                         Spacer() //  pushes stufg up
-                    }
+                 
+                }
                 }
             }
             .onAppear {
                 
                 if let savedEvents = UserDefaults.standard.stringArray(forKey: eventsKey) {
                     eventsArray = savedEvents
+               
                 }
             }
-        }
+        
+        
+      
+    }
     }
     
     struct EventsPage_Previews: PreviewProvider {
         static var previews: some View {
             EventsPageView()
+      
         }
+        
     }
     
 

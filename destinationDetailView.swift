@@ -13,7 +13,7 @@ struct DestinationDetailView: View {
 
     var body: some View {
         ZStack {
-            // 🌴 Background image (make sure it's added to Assets)
+        
             Image("tropicalBackground")
                 .resizable()
                 .ignoresSafeArea()

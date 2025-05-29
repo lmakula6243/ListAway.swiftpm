@@ -15,7 +15,7 @@ struct ContentView: View {
                     .onAppear {
                         
                         withAnimation(Animation.easeInOut(duration: 10).repeatForever(autoreverses: true)) {
-                            // auto reverse: -550 ➡️ 550 ➡️ -550 ➡️ 550... (looping)
+                            // auto reverse: -550 -> 550 -> -550 -> 550... (looping)
                             xPosition = 550
                         }
                     }
