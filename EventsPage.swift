@@ -210,7 +210,7 @@ struct EventsPageView: View {
         }
         
     }
-}
+
 
 
 

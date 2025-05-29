@@ -9,63 +9,75 @@ import SwiftUI
 struct OnBoarding: View {
     var body: some View {
         NavigationStack {
-            
-            
-            TabView {
-                OB1View()
-                OB2View()
-                OB3View()
-                OB4View()
-                OB5View()
-            }
-            .tabViewStyle(.page)
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
-        }
-    }
-}
-#Preview {
-    OnBoarding()
-}
-
-struct OB1View: View {
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.pink.gradient)
-            VStack {
-                Text("  ListAway Instructions")
-                    .font(.custom("Chalkboard SE", size: 40))
-                    .padding()
-                HStack {
-                    Image(systemName: "camera.macro")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                    Image(systemName: "list.bullet.clipboard")
-                        .resizable()
-                        .frame(width: 40, height: 50)
-                    Image(systemName: "camera.macro")
-                        .resizable()
-                        .frame(width: 25, height: 25)
+            ZStack {
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.yellow.opacity(0.4),
+                        Color.pink.opacity(0.3),
+                        Color.blue.opacity(0.3)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+                
+                TabView {
+                    OB1View()
+                    OB2View()
+                    OB3View()
+                    OB4View()
+                    OB5View()
                 }
+                .tabViewStyle(.page)
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
             }
-            .foregroundStyle(.white)
         }
-        .frame(width: 350, height: 350)
     }
 }
-#Preview {
-    OB1View()
-}
-
-struct OB2View: View {
-    @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
-    var body: some View {
-        
+    #Preview {
+        OnBoarding()
+    }
+    
+    struct OB1View: View {
+        var body: some View {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.pink.opacity(0.3))
+                VStack {
+                    Text("  ListAway Instructions")
+                        .font(.custom("Chalkboard SE", size: 40))
+                        .padding()
+                    HStack {
+                        Image(systemName: "camera.macro")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        Image(systemName: "list.bullet.clipboard")
+                            .resizable()
+                            .frame(width: 40, height: 50)
+                        Image(systemName: "camera.macro")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                    }
+                }
+                .foregroundStyle(.white)
+            }
+            .frame(width: 350, height: 400)
+        }
+    }
+    #Preview {
+        OB1View()
+    }
+    
+    struct OB2View: View {
+        @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
+        var body: some View {
+            
             
             
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.pink.gradient)
+                    .fill(.pink.opacity(0.3))
                 VStack {
                     Text("- Click the large plus button to create a new list!")
                         .font(.custom("Chalkboard SE", size: 20))
@@ -82,101 +94,131 @@ struct OB2View: View {
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
                     HStack {
-                        Image(systemName: "")
+                        Image(systemName: "mountain.2")
+                            .resizable()
+                            .frame(width: 35, height: 30)
+                        Image(systemName: "building.2")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                        Image(systemName: "beach.umbrella")
+                            .resizable()
+                            .frame(width: 30, height: 30)
                     }
                     Text("- Click enter to add the new destination")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
                     
-                       
+                    
                 }
                 .foregroundStyle(.white)
             }
-            .frame(width: 350, height: 350)
+            .frame(width: 350, height: 400)
         }
     }
-
-#Preview {
-    OB2View()
-}
-
-struct OB3View: View {
-    @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
-    var body: some View {
-        
+    
+    #Preview {
+        OB2View()
+    }
+    
+    struct OB3View: View {
+        @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
+        var body: some View {
+            
             
             
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.pink.gradient)
+                    .fill(.pink.opacity(0.3))
                 VStack {
                     Text("- Next begin to create your packing list for your specific destination")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
+                    Image(systemName: "suitcase.rolling")
+                        .resizable()
+                        .frame(width: 30, height: 40)
                     Text("- Type in your item and how many of it you need")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
+                    HStack {
+                        Image(systemName: "pencil.and.list.clipboard")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                        Image(systemName: "number.circle")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    }
                     Text("- Click Enter to add your item")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
-                    Image(systemName: "star")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                    
                     
                 }
                 .foregroundStyle(.white)
             }
-            .frame(width: 350, height: 350)
+            .frame(width: 350, height: 400)
         }
     }
-
-#Preview {
-    OB3View()
-}
-
-struct OB4View: View {
-    @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
-    var body: some View {
-        
+    
+    #Preview {
+        OB3View()
+    }
+    
+    struct OB4View: View {
+        @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
+        var body: some View {
+            
             
             
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.pink.gradient)
+                    .fill(.pink.opacity(0.3))
                 VStack {
                     Text("Click the circle in the corner of each item to check it off")
                         .font(.custom("Chalkboard SE", size: 20))
                         .padding()
-                    Image(systemName: "star")
+                    Image(systemName: "checklist.rtl")
                         .resizable()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 60, height: 50)
                     
                 }
                 .foregroundStyle(.white)
             }
-            .frame(width: 350, height: 350)
+            .frame(width: 350, height: 400)
         }
     }
-
-#Preview {
-    OB4View()
-}
-
-struct OB5View: View {
-    @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
-    var body: some View {
-        
+    
+    #Preview {
+        OB4View()
+    }
+    
+    struct OB5View: View {
+        @AppStorage("hasSeenOnBoarding") private var hasSeenOnBoarding: Bool = false
+        var body: some View {
+            
             
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.pink.gradient)
+                    .fill(.pink.opacity(0.3))
                 VStack {
                     Text("Now you will never forget another thing to pack on your vacation!")
                         .font(.custom("Chalkboard SE", size: 30))
                         .padding()
-                    Image(systemName: "star")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                    HStack {
+                        Image(systemName: "suitcase")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .padding()
+                        Image(systemName: "list.clipboard")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .padding()
+                        Image(systemName: "face.smiling")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .padding()
+                        
+                    }
+                    .padding()
                     NavigationLink("Continue to App", destination: {
                         ContentView()
                     })
@@ -190,9 +232,9 @@ struct OB5View: View {
                             .fill(
                                 LinearGradient(
                                     gradient: Gradient(colors: [
-                                        Color.pink,
-                                        Color.yellow,
-                                        Color.blue
+                                        Color.yellow.opacity(0.4),
+                                        Color.pink.opacity(0.3),
+                                        Color.blue.opacity(0.3)
                                     ]),
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
@@ -203,12 +245,13 @@ struct OB5View: View {
                 }
                 .foregroundStyle(.white)
             }
-            .frame(width: 350, height: 350)
+            .frame(width: 350, height: 400)
         }
     }
-
-#Preview {
-    OB5View()
-}
-
+    
+    #Preview {
+        OB5View()
+    }
+    
+    
 
